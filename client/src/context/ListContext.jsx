@@ -6,7 +6,9 @@ export function ListProvider({ children }) {
   const [listsData, setListsData] = useState(null);
 
   const fetchLists = async () => {
-    const response = await fetch("http://localhost:8000/api/lists");
+    const response = await fetch(
+      "http://https://shop-leaf-backend.onrender.com/api/lists"
+    );
     const json = await response.json();
     if (response.ok) {
       setListsData(json);

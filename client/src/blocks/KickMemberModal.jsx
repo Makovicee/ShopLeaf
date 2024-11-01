@@ -23,7 +23,8 @@ export default function KickMemberModal({ listId, members, owner }) {
     const list = { member };
     console.log(list);
     const response = await fetch(
-      "http://localhost:8000/api/lists/kickMember/" + listId,
+      "http://https://shop-leaf-backend.onrender.com/api/lists/kickMember/" +
+        listId,
       {
         method: "DELETE",
         body: JSON.stringify(list),

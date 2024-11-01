@@ -30,7 +30,9 @@ export default function ListInventory() {
   const badSearch = listsData && filteredListData.length === 0;
   useEffect(() => {
     const fetchLists = async () => {
-      const response = await fetch("http://localhost:8000/api/lists");
+      const response = await fetch(
+        "http://https://shop-leaf-backend.onrender.com/api/lists"
+      );
       const json = await response.json();
 
       if (response.ok) {

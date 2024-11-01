@@ -40,7 +40,10 @@ export default function ListCard({ list }) {
     : list.items.filter((item) => item.status === false);
   async function handleCheck(itemId, state) {
     const response = await fetch(
-      "http://localhost:8000/api/lists/itemDone/" + list._id + "/" + itemId,
+      "http://https://shop-leaf-backend.onrender.com/api/lists/itemDone/" +
+        list._id +
+        "/" +
+        itemId,
       {
         method: "PATCH",
         body: JSON.stringify({ status: state }),
@@ -62,7 +65,8 @@ export default function ListCard({ list }) {
 
   async function handleDelete() {
     const response = await fetch(
-      "http://localhost:8000/api/lists/delete/" + list._id,
+      "http://https://shop-leaf-backend.onrender.com/api/lists/delete/" +
+        list._id,
       {
         method: "DELETE",
       }
@@ -76,7 +80,10 @@ export default function ListCard({ list }) {
 
   async function handleDeleteItem(itemId) {
     const response = await fetch(
-      "http://localhost:8000/api/lists/itemDelete/" + list._id + "/" + itemId,
+      "http://https://shop-leaf-backend.onrender.com/api/lists/itemDelete/" +
+        list._id +
+        "/" +
+        itemId,
       {
         method: "DELETE",
       }
@@ -98,7 +105,8 @@ export default function ListCard({ list }) {
     const list = user;
     console.log(list);
     const response = await fetch(
-      "http://localhost:8000/api/lists/kickMember/" + listId,
+      "http://https://shop-leaf-backend.onrender.com/api/lists/kickMember/" +
+        listId,
       {
         method: "DELETE",
         body: JSON.stringify(list),

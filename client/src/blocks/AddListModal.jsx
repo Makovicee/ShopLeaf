@@ -13,11 +13,14 @@ export default function AddListModal() {
     e.preventDefault();
     const list = { name, status: currentUser.name, members: currentUser.name };
 
-    const response = await fetch("http://localhost:8000/api/lists/create", {
-      method: "POST",
-      body: JSON.stringify(list),
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      "http://https://shop-leaf-backend.onrender.com/api/lists/create",
+      {
+        method: "POST",
+        body: JSON.stringify(list),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     const json = await response.json();
     if (!response.ok) {
