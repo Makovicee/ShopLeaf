@@ -14,7 +14,7 @@ export default function AddItemModal({ listId }) {
     };
 
     const response = await fetch(
-      "http://https://shop-leaf-backend.onrender.com/api/lists/add/" + listId,
+      "https://shop-leaf-backend.onrender.com/api/lists/add/" + listId,
       {
         method: "PATCH",
         body: JSON.stringify(list),

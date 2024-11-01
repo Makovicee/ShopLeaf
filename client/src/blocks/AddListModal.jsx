@@ -14,7 +14,7 @@ export default function AddListModal() {
     const list = { name, status: currentUser.name, members: currentUser.name };
 
     const response = await fetch(
-      "http://https://shop-leaf-backend.onrender.com/api/lists/create",
+      "https://shop-leaf-backend.onrender.com/api/lists/create",
       {
         method: "POST",
         body: JSON.stringify(list),

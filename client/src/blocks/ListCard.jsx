@@ -40,7 +40,7 @@ export default function ListCard({ list }) {
     : list.items.filter((item) => item.status === false);
   async function handleCheck(itemId, state) {
     const response = await fetch(
-      "http://https://shop-leaf-backend.onrender.com/api/lists/itemDone/" +
+      "https://shop-leaf-backend.onrender.com/api/lists/itemDone/" +
         list._id +
         "/" +
         itemId,
@@ -65,8 +65,7 @@ export default function ListCard({ list }) {
 
   async function handleDelete() {
     const response = await fetch(
-      "http://https://shop-leaf-backend.onrender.com/api/lists/delete/" +
-        list._id,
+      "https://shop-leaf-backend.onrender.com/api/lists/delete/" + list._id,
       {
         method: "DELETE",
       }
@@ -80,7 +79,7 @@ export default function ListCard({ list }) {
 
   async function handleDeleteItem(itemId) {
     const response = await fetch(
-      "http://https://shop-leaf-backend.onrender.com/api/lists/itemDelete/" +
+      "https://shop-leaf-backend.onrender.com/api/lists/itemDelete/" +
         list._id +
         "/" +
         itemId,
@@ -105,8 +104,7 @@ export default function ListCard({ list }) {
     const list = user;
     console.log(list);
     const response = await fetch(
-      "http://https://shop-leaf-backend.onrender.com/api/lists/kickMember/" +
-        listId,
+      "https://shop-leaf-backend.onrender.com/api/lists/kickMember/" + listId,
       {
         method: "DELETE",
         body: JSON.stringify(list),

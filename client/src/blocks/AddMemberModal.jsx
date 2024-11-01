@@ -22,8 +22,7 @@ export default function AddMemberModal({ listId, members, owner }) {
     const list = { member };
 
     const response = await fetch(
-      "http://https://shop-leaf-backend.onrender.com/api/lists/addMember/" +
-        listId,
+      "https://shop-leaf-backend.onrender.com/api/lists/addMember/" + listId,
       {
         method: "PATCH",
         body: JSON.stringify(list),

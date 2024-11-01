@@ -11,8 +11,7 @@ export default function UpdateListModal({ listId }) {
     const list = { name: name };
     console.log(listId);
     const response = await fetch(
-      "http://https://shop-leaf-backend.onrender.com/api/lists/update/" +
-        listId,
+      "https://shop-leaf-backend.onrender.com/api/lists/update/" + listId,
       {
         method: "PATCH",
         body: JSON.stringify(list),

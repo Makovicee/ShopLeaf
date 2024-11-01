@@ -31,7 +31,7 @@ export default function ListInventory() {
   useEffect(() => {
     const fetchLists = async () => {
       const response = await fetch(
-        "http://https://shop-leaf-backend.onrender.com/api/lists"
+        "https://shop-leaf-backend.onrender.com/api/lists"
       );
       const json = await response.json();
 
