@@ -28,17 +28,18 @@ export default function ListInventory() {
     listsData.filter((list) => list.members.includes(currentUser.name))
       .length === 0;
   const badSearch = listsData && filteredListData.length === 0;
+
   useEffect(() => {
     refreshLists();
-  }, [refreshLists]);
+  }, []);
 
   return (
     <>
       <Search onSearch={setSearch} />
       {loading ? (
         <div className="flex justify-center items-center h-96">
-          <span className="loading loading-ring loading-lg"></span>
-          <p>Loading please wait...</p>
+          <span className="loading loading-ring loading-lg"></span> <br />
+          <p>Waiting for the server to awake from sleep ...</p>
         </div>
       ) : isEmpty ? (
         <>
