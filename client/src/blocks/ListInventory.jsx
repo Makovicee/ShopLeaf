@@ -15,7 +15,7 @@ export default function ListInventory() {
   const [search, setSearch] = useState("");
   const { userList, loggedInUser, setLoggedInUser } = useContext(UserContext);
   const currentUser = userList.find((user) => user.id === loggedInUser);
-  const { listsData, refreshLists } = useListContext();
+  const { listsData, refreshLists, loading } = useListContext();
   const filteredListData =
     listsData &&
     listsData.filter(
@@ -29,23 +29,18 @@ export default function ListInventory() {
       .length === 0;
   const badSearch = listsData && filteredListData.length === 0;
   useEffect(() => {
-    const fetchLists = async () => {
-      const response = await fetch(
-        "https://shop-leaf-backend.onrender.com/api/lists"
-      );
-      const json = await response.json();
-
-      if (response.ok) {
-        setListsData(json); //probably remove
-      }
-    };
-    fetchLists();
-  }, []);
+    refreshLists();
+  }, [refreshLists]);
 
   return (
     <>
       <Search onSearch={setSearch} />
-      {isEmpty ? (
+      {loading ? (
+        <div className="flex justify-center items-center h-96">
+          <span className="loading loading-ring loading-lg"></span>
+          <p>Loading please wait...</p>
+        </div>
+      ) : isEmpty ? (
         <>
           <Error
             title={"Lets get started!"}
