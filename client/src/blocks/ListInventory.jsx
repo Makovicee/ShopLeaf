@@ -29,10 +29,6 @@ export default function ListInventory() {
       .length === 0;
   const badSearch = listsData && filteredListData.length === 0;
 
-  useEffect(() => {
-    refreshLists();
-  }, []);
-
   return (
     <>
       <Search onSearch={setSearch} />
