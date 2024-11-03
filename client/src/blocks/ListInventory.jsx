@@ -32,6 +32,15 @@ export default function ListInventory() {
   return (
     <>
       <Search onSearch={setSearch} />
+
+      {loading && (
+        <div className="flex justify-center items-center h-96">
+          <span className="loading loading-ring loading-lg"></span> <br />
+          <p>Waiting for the server to load / awake from sleep ...</p>
+          <p>Please stand by.</p>
+        </div>
+      )}
+
       {isEmpty ? (
         <>
           <Error
