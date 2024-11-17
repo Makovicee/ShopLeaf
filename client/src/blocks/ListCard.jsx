@@ -19,6 +19,8 @@ import {
   mdiAccountRemove,
   mdiExitRun,
   mdiRun,
+  mdiArchiveArrowDown,
+  mdiArchiveArrowUp,
 } from "@mdi/js";
 import { useState, useEffect, useContext } from "react";
 import RadialProgress from "./RadialProgress";
@@ -60,6 +62,28 @@ export default function ListCard({ list }) {
       console.log("done:", json);
 
       refreshLists();
+    }
+  }
+
+  async function handleArchive(state) {
+    const response = await fetch(
+      "https://shop-leaf-backend.onrender.com/api/lists/update/" + list._id,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ archived: state }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    const json = await response.json();
+    if (!response.ok) {
+      console.log(json.error);
+    }
+    if (response.ok) {
+      console.log("list status updated:  ", json);
+
+      refreshLists();
+      document.getElementById("update" + listId).close();
     }
   }
 
@@ -185,6 +209,24 @@ export default function ListCard({ list }) {
         <div className="text-xl text-center ml-7">{list.name}</div>
       </div>
       <div className="collapse-content">
+        <div className="text-center mb-4">
+          <button
+            onClick={() => handleArchive(!list.archived)}
+            title={`Set to ${list.archived ? "Active" : "Archived"}`}
+          >
+            {list.archived ? (
+              <div className="flex justify-center">
+                <span className="font-bold">Archived</span>{" "}
+                <Icon path={mdiArchiveArrowUp} size={1} />
+              </div>
+            ) : (
+              <div className="flex justify-center">
+                <span className="font-bold">Active</span>{" "}
+                <Icon path={mdiArchiveArrowDown} size={1} />
+              </div>
+            )}
+          </button>
+        </div>
         <div className="items-center card-actions justify-center">
           {list.status === currentUser.name && (
             <div>
@@ -285,6 +327,7 @@ export default function ListCard({ list }) {
                   >
                     <Icon path={mdiAccountRemove} size={1.25} color={"white"} />
                   </button>
+
                   <KickMemberModal
                     listId={list._id}
                     members={list.members}

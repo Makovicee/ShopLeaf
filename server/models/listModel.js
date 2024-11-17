@@ -27,6 +27,10 @@ const listSchema = new Schema(
       type: Array,
       required: false, //change to true later on
     },
+    archived: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

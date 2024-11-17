@@ -11,9 +11,11 @@ import AddListModal from "./AddListModal";
 import { useListContext } from "../context/ListContext";
 import { UserContext } from "../context/UserProvider";
 import { useContext } from "react";
+import { ArchiveSwapper } from "./ArchiveSwapper";
 export default function ListInventory() {
   const [search, setSearch] = useState("");
   const { userList, loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const [archiveSwap, setArchiveSwap] = useState("all");
   const currentUser = userList.find((user) => user.id === loggedInUser);
   const { listsData, refreshLists, loading } = useListContext();
   const filteredListData =
@@ -21,18 +23,26 @@ export default function ListInventory() {
     listsData.filter(
       (list) =>
         list.name.toLowerCase().includes(search.toLowerCase()) &&
-        list.members.includes(currentUser.name)
+        list.members.includes(currentUser.name) &&
+        (archiveSwap === "all" ||
+          (archiveSwap === "active" ? !list.archived : list.archived))
     );
+
   const isEmpty =
     listsData &&
     listsData.filter((list) => list.members.includes(currentUser.name))
       .length === 0;
   const badSearch = listsData && filteredListData.length === 0;
-
+  console.log(archiveSwap);
   return (
     <>
       <Search onSearch={setSearch} />
-
+      <div className=" flex justify-center mb-6">
+        <ArchiveSwapper
+          archiveSwap={archiveSwap}
+          setArchiveSwap={setArchiveSwap}
+        />
+      </div>
       {loading && (
         <div className="flex justify-center items-center h-96">
           <span className="loading loading-ring loading-lg"></span> <br />
