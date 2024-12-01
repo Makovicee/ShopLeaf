@@ -22,34 +22,47 @@ const createList = async (req, res) => {
 const deleteList = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res
-      .status(404)
-      .json({ error: "No such list exits in the database" });
+  try {
+    const list = await List.findOneAndDelete({ _id: id });
+
+    if (!list) {
+      return res
+        .status(404)
+        .json({ error: "No such list exists in the database" });
+    }
+
+    res.status(200).json({ message: "List deleted successfully", list });
+  } catch (error) {
+    res.status(500).json({ error: "Server error", details: error.message });
   }
-
-  const list = await List.findOneAndDelete({ _id: id });
-
-  if (!list) {
-    res.status(404).json({ error: "No such list exits in the database" });
-  }
-
-  res.status(200).json(list);
 };
+
 //update list
 const updateList = async (req, res) => {
   const { id } = req.params;
 
+  // Check if the ObjectId is valid
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    res.status(404).json({ error: "No such list exits in the database" });
+    return res
+      .status(404)
+      .json({ error: "No such list exists in the database" });
   }
 
-  const list = await List.findOneAndUpdate({ _id: id }, { ...req.body });
+  // Attempt to update the list
+  const list = await List.findOneAndUpdate(
+    { _id: id },
+    { ...req.body },
+    { new: true }
+  );
 
+  // If the list is not found, return a 404 error
   if (!list) {
-    res.status(404).json({ error: "No such list exits in the database" });
+    return res
+      .status(404)
+      .json({ error: "No such list exists in the database" });
   }
 
+  // Return the updated list
   res.status(200).json(list);
 };
 

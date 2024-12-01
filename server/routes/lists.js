@@ -12,16 +12,29 @@ const {
   itemDelete,
   kickMember,
 } = require("../controllers/controller");
+
+const {
+  listValidationSchema,
+  updateListSchema,
+} = require("../validation/listValidation");
+const { validateDtoIn } = require("../validation/validateMiddleware");
+const { idValidation } = require("../validation/idValidation");
+
 //get all lists
 router.get("/", getLists);
 
 //create list
-router.post("/create", createList);
+router.post("/create", validateDtoIn(listValidationSchema), createList);
 
 //delete
-router.delete("/delete/:id", deleteList);
+router.delete("/delete/:id", idValidation, deleteList);
 //update
-router.patch("/update/:id", updateList);
+router.patch(
+  "/update/:id",
+  validateDtoIn(updateListSchema),
+  idValidation,
+  updateList
+);
 
 router.patch("/add/:id", addItem);
 
