@@ -8,8 +8,8 @@ const listValidationSchema = Joi.object({
       status: Joi.boolean(),
     })
   ),
-  status: Joi.string().required(),
-  members: Joi.array().items(Joi.string()).required(),
+  status: Joi.string(),
+  members: Joi.array().items(Joi.string()),
   archived: Joi.boolean(),
 });
 
