@@ -9,9 +9,9 @@ const getLists = async (req, res) => {
 
 //create list
 const createList = async (req, res) => {
-  const { name } = req.body;
+  const { name, items, status, members } = req.body;
   try {
-    const list = await List.create({ name });
+    const list = await List.create({ name, items, status, members });
     res.status(200).json(list);
   } catch (error) {
     res.status(400).json({ error: error.message });
