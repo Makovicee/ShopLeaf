@@ -11,7 +11,12 @@ export default function AddListModal() {
   const currentUser = userList.find((user) => user.id === loggedInUser);
   async function handleSubmit(e) {
     e.preventDefault();
-    const list = { name, status: currentUser.name, members: currentUser.name };
+    const list = {
+      name,
+      items: [],
+      status: currentUser.name,
+      members: [currentUser.name],
+    };
 
     const response = await fetch(
       "https://shop-leaf-backend.onrender.com/api/lists/create",
