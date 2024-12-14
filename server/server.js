@@ -15,13 +15,19 @@ app.use((req, res, next) => {
 app.use("/api/lists", listRoutes);
 
 //connect to mongoDB(Atlas)
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(process.env.PORT, () =>
-      console.log("Connected to the db and listing on port:", process.env.PORT)
-    );
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+if (process.env.NODE_ENV !== "test") {
+  mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+      app.listen(process.env.PORT, () =>
+        console.log(
+          "Connected to the db and listening on port:",
+          process.env.PORT
+        )
+      );
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+module.exports = app;
